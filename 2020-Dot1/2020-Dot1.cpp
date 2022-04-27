@@ -43,7 +43,7 @@ int Search(int a[], int n, int value)
     return -1;
 }
 
-int LongestMountain (int a[], int n)
+int LongestHill (int a[], int n)
 {
     if(n<3)
         return -1;
@@ -55,15 +55,15 @@ int LongestMountain (int a[], int n)
     for (int i=0;i<n;i++)
     {
         //tìm base
-        if(a[i]>a[i+1] && i<n-1)
+        if(a[i]<a[i+1] && i<n-1)
         {
             base = i;
-            while (a[i]>a[i+1] && i<n-1)
-                i++;
-            peak = i;
             while (a[i]<a[i+1] && i<n-1)
                 i++;
-            end = i;
+            peak = i;//Tìm peak
+            while (a[i]>a[i+1] && i<n-1)
+                i++;
+            end = i;//Tìm end
             if(end == peak)
                 continue;
             else
@@ -75,7 +75,7 @@ int LongestMountain (int a[], int n)
                     base_max = base;
                 }
             }
-            i--;
+            i--;//chú ý trừ 1, vì giá trị cuối này có thể là chân của núi tiếp theo
         }
 
     }
@@ -85,7 +85,9 @@ int LongestMountain (int a[], int n)
 int main()
 {
     int a[] = {2,3,5,6,8,10,13,17,20,23,32,35,38,45,47,50};
-    int b[] = {2,3,4,5,3,2,4,5,6,7,8,9,3,2,3,4,3,2,1,0,1,2,3,4,5,3,2};
+    //int b[] = {2,3,4,5,3,2,4,5,6,7,8,9,3,2,3,4,3,2,1,0,1,2,3,4,5,3,2};
+    //int b[] = { 9,8,7,6,5,6,7,4,3,2,1,0,3,4,5,6,6};
+    int b[] = {1,2,1};
     int n = sizeof(a) / sizeof(int);
     int m = sizeof(b) / sizeof(int);
     cout << "Max below a[2] = 8 -> " << MaxBelow(a, n, 2) << endl;
@@ -96,7 +98,7 @@ int main()
     cout << "Vi tri cua so 17: " << Search(a, n, 17) << endl;
     cout << "Vi tri cua so 20: " << Search(a, n, 20) << endl;
     cout << "Vi tri cua so 50: " << Search(a, n, 50) << endl;
-    cout << "Chuoi dai nhat: "<<LongestMountain(b,m) <<endl;
+    cout << "Chuoi dang Moutain dai nhat: "<< LongestHill(b,m) <<endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
