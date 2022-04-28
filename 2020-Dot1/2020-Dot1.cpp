@@ -99,6 +99,29 @@ int main()
     cout << "Vi tri cua so 20: " << Search(a, n, 20) << endl;
     cout << "Vi tri cua so 50: " << Search(a, n, 50) << endl;
     cout << "Chuoi dang Moutain dai nhat: "<< LongestHill(b,m) <<endl;
+
+
+    int iNum1 = 92342309;
+    int iNum2 = iNum1 / 10;
+    int iNum3 = iNum2 / 10;
+    int iNum4 = iNum3 / 10;
+    int iNum5 = iNum1 / 1000;
+    cout << iNum2 << endl;
+    cout << iNum3 << endl;
+    cout << iNum4 << endl;
+    cout << iNum5 << endl;
+
+    int x = iNum1 % 10;
+    int x10 = iNum2 % 10;
+    int x100 = iNum3 % 10;
+    int x1000 = iNum4 % 10;
+    cout << x << endl;
+    cout << x10 << endl;
+    cout << x100 << endl;
+    cout << x1000 << endl;
+
+
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

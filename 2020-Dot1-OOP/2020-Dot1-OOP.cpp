@@ -42,16 +42,11 @@ private:
 	int width;
 	int height;
 public:
-	Rectangle(int x, int y, int w, int h, DrawingShape* ds): Shape(ds)
-	{
-		this->x = x;
-		this->y = y;
-		this->width = w;
-		this->height = h;
-		this->drawer = ds;
-	}
+	Rectangle(int x = 0, int y = 0, int w = 0, int h = 0, DrawingShape* ds = NULL) : x(x), y(y), width(w), height(h), Shape(ds) {};
 	void draw()
 	{
+		drawer->draw(this);
+		cout << "Rectangle draw with x =" << x << ", y =" << y << ", width =" << width << ", height =" << height << endl;
 	}
 };
 
@@ -62,15 +57,11 @@ private:
 	int y;
 	int radius;
 public:
-	Circle(int x, int y, int r, DrawingShape* ds) : Shape(ds)
-	{
-		this->x = x;
-		this->y = y;
-		this->radius = r;
-		this->drawer = ds;
-	}
+	Circle(int x = 0, int y = 0, int r = 0, DrawingShape* ds = NULL) : x(x), y(y), radius(r), Shape(ds) {};
 	void draw()
 	{
+		drawer->draw(this);
+		cout << "Circle draw with x =" << x << ", y =" << y << ", radius =" << radius << endl;
 	}
 };
 
