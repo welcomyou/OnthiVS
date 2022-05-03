@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 using namespace std;
 
 class DrawingShape;
@@ -24,7 +24,7 @@ public:
 class Shape
 {
 protected:
-	DrawingShape* drawer;
+	DrawingShape* drawer;// Do DrawingShape là thuần ảo, nên ko thể tạo object, phải dùng pointer
 public:
 
 	Shape(DrawingShape* ds)
@@ -67,5 +67,12 @@ public:
 
 int main()
 {
+	/*
+	* Do tính chất kế thừa nên các phần tử của mảng s (có kiểu con trỏ Shape) có thể trỏ đến 
+	các đối tượng thuộc lớp con của nó (Rectangle và Circle).
+
+	Do cơ chế đa xạ (polymorphism) nên trong vòng lặp gọi hàm draw, 
+	các đối tượng Rectangle và Circle sẽ biết tự gọi hàm tương ứng của lớp của mình.
+	*/
 	return 0;
 }
