@@ -5,6 +5,7 @@ typedef struct node node;
 struct node
 {
     int value;
+    int priority;
     node* pnext;
 };
 
@@ -20,6 +21,7 @@ void addtail(list* ls, int a)
     node* newnode = (node*)malloc(sizeof(node));
     newnode->pnext = NULL;
     newnode->value = a;
+    newnode->priority = 0;
     if (ls->pHead == NULL)
         ls->pHead = newnode;
     if (ls->pTail != NULL)
@@ -31,6 +33,7 @@ void addhead(list* ls, int a)
     node* newnode = (node*)malloc(sizeof(node));
     newnode->pnext = NULL;
     newnode->value = a;
+    newnode->priority = 0;
 
     if (ls->pHead == NULL)
         ls->pHead = ls->pTail = newnode;
@@ -40,6 +43,23 @@ void addhead(list* ls, int a)
         ls->pHead = newnode;
     }
 }
+void addpriority(list* ls, int a, int priority)
+{
+    node* newnode = (node*)malloc(sizeof(node));
+    newnode->pnext = NULL;
+    newnode->value = priority;
+
+    if(ls->pHead == NULL)
+
+    if (ls->pHead == NULL)
+        ls->pHead = ls->pTail = newnode;
+    else
+    {
+        newnode->pnext = ls->pHead;
+        ls->pHead = newnode;
+    }
+}
+
 void removehead(list* ls)
 {
     if (ls->pHead == NULL)//Ko có phần tử

@@ -62,7 +62,7 @@ void traversal(Node<T>* tree)
 }
 
 template<class T>
-void insertnode(Node<T>* &tree, T value)
+Node<T>* insertnode(Node<T>* &tree, T value)
 {
     if (tree == NULL)//TH cây rỗng
     {
@@ -70,7 +70,7 @@ void insertnode(Node<T>* &tree, T value)
         x->pLeft = x->pRight = x->pParent = NULL;
         x->key = value;
         tree = x;
-        return;
+        return x;
     }
 
     if (value < tree->key)
@@ -82,9 +82,10 @@ void insertnode(Node<T>* &tree, T value)
             x->key = value;
             x->pParent = tree;
             tree->pLeft = x;
+            return x;
         }
         else//Nếu chưa rỗng đi tiếp
-            insertnode(tree->pLeft, value);
+            return insertnode(tree->pLeft, value);
     }
     else
     {
@@ -95,9 +96,10 @@ void insertnode(Node<T>* &tree, T value)
             x->key = value;
             x->pParent = tree;
             tree->pRight = x;
+            return x;
         }
         else//Nếu chưa rỗng đi tiếp
-            insertnode(tree->pRight, value);
+            return insertnode(tree->pRight, value);
     }
 
 }
@@ -296,7 +298,8 @@ Node<T>* Max_even_X(Node<T>* pRoot, int x, Node<T>*& max)
     Max_even_X(pRoot->pLeft, x, max);
 }
 
-
+//Kiểm tra 1 cây có phải cây con với cùng node
+//gốc
 template<class T>
 bool IsMatch(Node<T>* root, Node<T>* child)
 {
@@ -317,7 +320,8 @@ bool IsMatch(Node<T>* root, Node<T>* child)
     return kq && kql && kqr;
 
 }
-
+//Kiểm tra 1 cây có phải cây con ko, node bất kỳ
+//Đầu tiên kiếm node có key giống cây con
 template<class T>
 bool IsChild(Node<T>* root, Node<T>* child)
 {
@@ -334,12 +338,37 @@ bool IsChild(Node<T>* root, Node<T>* child)
     return kq;
 }
 
+//Hiện tất cả nút lá của cây
+template<class T>
+void ShowLeaf(Node<T>* tree)
+{
+    if (tree == NULL)
+        return;
+    if (tree->pLeft == NULL && tree->pRight == NULL)
+    {
+        cout << tree->key <<"|";
+    }
+    else
+    {
+        if (tree->pLeft != NULL)
+            ShowLeaf(tree->pLeft);
+        if (tree->pRight != NULL)
+            ShowLeaf(tree->pRight);
+    }
+}
+
 int main()
 {
     //Khai báo Tree bằng NULL
     Node<int>* tree = NULL;
     Node<int>* child = NULL;
 
+    /*
+    *           7
+    *     4          12
+    *   3   5      9     13
+    * 1       5      9
+    */
     insertnode(tree, 7);
     insertnode(tree, 4);
     insertnode(tree, 12);
@@ -357,15 +386,16 @@ int main()
     insertnode(child, 3);
     insertnode(child, 1);
     insertnode(child, 5);
-    insertnode(child, 6);
+    insertnode(child, 5);
     traversal(child);
 
     cout << "Kiem tra cay con:" << IsChild<int>(tree, child)<<endl;
-
     int a[10] = { 7,4,12,3,5,5,9,9,13,1 };
     //Chú ý cách khai báo hàm template
     Node<int>* tree2 = convertArrayToTree<int>(a, 10);
     traversal(tree2);
+    cout << endl;
+    ShowLeaf(tree);
     cout << endl;
 
     Node<int>* nodesearch = searchTreeRecursive<int>(tree, 4);

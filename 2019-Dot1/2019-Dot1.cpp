@@ -58,7 +58,7 @@ bool checkMonge(int m, int n, int** a)
     return flag;
 }
 
-//Nhập 1 số nguyên, trả ra số nghịch đảo
+//Nhập 1 số nguyên ko âm, trả ra số nghịch đảo
 //Đề 2019 - KHMT - mã 02
 int reverse(int x)
 {
@@ -72,7 +72,8 @@ int reverse(int x)
     return r;
 }
 
-//Kiểm trùng
+//Kiểm trùng dãy số nguyên có n phần tử với giá trị từ 0
+// đến n-1. Xem giá trị nào bị trùng và trùng bao nhiêu
 template <class T>
 void checkDuplicate(const vector<T> &arr, vector<T> &dup, vector<T> &times)
 {
